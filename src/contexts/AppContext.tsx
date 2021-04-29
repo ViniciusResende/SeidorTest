@@ -3,11 +3,13 @@ import { createContext, ReactNode, useCallback, useState } from "react";
 interface AppContextData {
   isListInDisplay: boolean;
   isRegisterInDisplay: boolean;
+  user: User;
   users: User[];
   menuListHandler: () => void;
   menuRegisterHandler: () => void;
   handleChange: (e: React.FormEvent<HTMLInputElement>) => void;
-  submitUser: () => any;
+  submitUser: () => void;
+  deleteUser: (cpf: string) => void;
 }
 
 interface CountdownProviderProps {
@@ -62,7 +64,8 @@ export function AppProvider({ children }: CountdownProviderProps){
 
   const submitUser = () => {
     // verifies if the user exists and update it in the case of
-    const userAlreadyExists = users.find((userStoraged) => {
+    let userAlreadyExists = false;
+    users.find((userStoraged) => {
       if(userStoraged.cpf === user.cpf){
         const notChangedUsers = users.filter((userStoraged) => userStoraged.cpf !== user.cpf);
         console.log(notChangedUsers);
@@ -75,8 +78,8 @@ export function AppProvider({ children }: CountdownProviderProps){
           ...notChangedUsers,
           newUser
         ])
+        userAlreadyExists = true;
       }
-      return true;
     })
 
     if(!userAlreadyExists){
@@ -93,6 +96,7 @@ export function AppProvider({ children }: CountdownProviderProps){
     }    
     setIsListInDisplay(true);
     setIsRegisterInDisplay(false);
+    setUser({} as User);
   }
 
   const calculateSalary = (salary: number, tributeDiscount: number, dependents: number): number => {
@@ -126,15 +130,22 @@ export function AppProvider({ children }: CountdownProviderProps){
     return Math.round((IRRF + Number.EPSILON) * 100) / 100;
   }
 
+  const deleteUser = (cpf: string) => {
+    const newUsers = users.filter((userStoraged) => userStoraged.cpf !== cpf);
+    setUsers(newUsers);
+  }
+
   return(
     <AppContext.Provider value={{
       isListInDisplay,
       isRegisterInDisplay,
+      user,
       users,
       menuListHandler,
       menuRegisterHandler,
       handleChange,
       submitUser,
+      deleteUser,
     }}>
       {children}
     </AppContext.Provider>

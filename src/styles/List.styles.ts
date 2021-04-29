@@ -6,21 +6,56 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #EFF4F9 6rem, #fff 10%);
-  padding: 0rem 1rem;
 
-  div.listContainer{
-    font-family: 'Nunito', sans-serif;
-  }
-
-  div.listContainer div.titleArea {
+  header.headerArea {
+    background: var(--purple-500);
     width: 100%;
     padding: 1rem 0;
     margin-bottom: 1rem;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+
+    > img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    > h2 {
+      margin-top: 1rem;
+      color: var(--gray-100);
+    }
   }
+
+
+  div.listContainer{
+    font-family: 'Nunito', sans-serif;
+    width: 60%;
+    min-height: 70vh;
+    
+    div.informationSection{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      > h2 {
+        font-size: 1.25rem;
+        color: var(--gray-800);
+        margin: 1.75rem 0;
+      }
+
+      > p {
+        color: var(--gray-200);
+        margin-bottom: 1rem;
+        text-align: justify;
+      }
+    }
+  }
+
 
   div.listContainer div.titleArea h1{
     color: #445566;
@@ -29,51 +64,75 @@ export const Wrapper = styled.div`
   }
 
   div.listContainer h3{
-    color: #1188EE;
+    color: var(--purple-300);
     margin-bottom: 0.75rem;
   }
 
   div.listContainer div.line{
-    background: #EFF4F9;
+    background: var(--purple-300);
     width: 100%;
     height: 0.13rem;
 
     margin-bottom: 1rem;
   }
 
-  div.listContainer div.inputArea{
-    display: flex;
-    flex-direction: column;
-  }
-
-  div.listContainer div.inputArea span{
-    color: #445566;
-    font-weight: 700;
-    margin: 0 0 0.25rem 1px;
-  }
-
-  div.listContainer div.inputArea input{
-    background: #EFF4F9;
-    border: none;
-    border-radius: 5px;
-    padding: 1rem;
-    box-shadow: 0px 2px 2px rgba(187, 204, 221, 0.4);
-  }
-
   div.listContainer table{
-    border: 2px solid rgba(187, 204, 221, 0.8);
-    padding: 0;
-    margin-top: 5rem;
-    margin-bottom: 10rem;
-    border-collapse: collapse;
-  }
+    width: 100%;
 
-  div.listContainer table td,
-  div.listContainer table th {
-    text-align: start;
-    border: 2px solid rgba(187, 204, 221, 0.8);
-    font-weight: 700;
-    padding: 0.5rem;
+    td,
+    th {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    th {
+      color: var(--gray-200);
+      text-transform: uppercase;
+      font: 500 0.75rem 'Nunito', sans-serif;
+      text-align: left;
+
+      &:nth-child(5),
+      &:nth-child(7){
+        text-align: center;
+      }
+    }
+
+    td {
+      font-size: 0.875rem;
+      color: var(--gray-800);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      line-height: 1.4rem;
+      font-size: 0.75rem;
+      
+      &:nth-child(5),
+      &:nth-child(7){
+        text-align: center;
+      }
+
+
+
+      button {
+        width: 2rem;
+        height: 2rem;
+        background: var(--white);
+        border: 1px solid var(--gray-100);
+        border-radius: 0.5rem;
+        font-size: 0;
+
+        transition: filter 0.2s ease;
+
+        img {
+          width: 1rem;
+          height: 1rem;
+        }
+
+        &:hover {
+          filter: brightness(0.95);
+        }
+      }
+    }
   }
 
   @media(max-width: 767px){

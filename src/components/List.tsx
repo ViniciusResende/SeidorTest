@@ -2,11 +2,15 @@ import React, { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext';
 import { Wrapper } from '../styles/List.styles';
 
+import TrashIcon from '../assets/trash.svg';
+import CircleIcon from '../assets/circle.svg';
+
 const List: React.FC = () => {
 
     const {
       isListInDisplay,
       users,
+      deleteUser
     } = useContext(AppContext);
 
     const formatCurrencyToString = (currency: number): string => {
@@ -21,9 +25,26 @@ const List: React.FC = () => {
     return (
     <Wrapper>
       {isListInDisplay && (  
+        <>
+        <header className="headerArea">
+          <img src={CircleIcon} alt="logo"/>
+          <h2>Registrar Funcionarios - Tabelas e cálculos do IRPF</h2>
+        </header>
         <div className="listContainer">
-          <div className="titleArea">
-            <h1>Lista</h1>
+          <div className="informationSection">
+            <h2>Tabelas e cálculos do IRPF</h2>
+            <p>A tabela do IR é um dos principais instrumentos para auxiliar
+              os contribuintes na hora de enviar as informações fiscais para a
+              Receita. Afinal, é nesse documento que constam as alíquotas do
+              Imposto de Renda.
+            </p>
+            <p>
+              Isso quer dizer que é essa a fonte para você saber qual é o percentual 
+              que deve ser aplicado sobre os seus rendimentos.
+              Portanto, na hora de fazer o cálculo e declarar seus rendimentos,
+              ter essa tabela é fundamental para que você não envie nenhum dado
+              errado e, consequentemente, não caia na malha fina.
+            </p>
           </div>
 
           <h3>Lista de Usuários</h3>
@@ -37,6 +58,7 @@ const List: React.FC = () => {
                 <th>Desconto</th>
                 <th>Dependentes</th>
                 <th>Desconto IRPF</th>
+                <th>Deletar</th>
               </tr>
             </thead>
             <tbody>
@@ -48,11 +70,17 @@ const List: React.FC = () => {
                   <td>R$ {formatCurrencyToString(user.tributeDiscount)}</td>
                   <td>{user.dependents}</td>
                   <td>R$ {formatCurrencyToString(user.costIRPF)}</td>
+                  <td>
+                    <button onClick={() => deleteUser(user.cpf)}>
+                      <img src={TrashIcon} alt="Apagar"/>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+      </>
       )}
     </Wrapper>
   )

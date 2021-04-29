@@ -1,51 +1,82 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.nav`
+  position: sticky;
+  right: 0;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+
+  background-color: #343a40;
+  padding: 1.5rem 6rem;
+
+  z-index: 1030;
+
   div.menuContainer{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
 
     width: 100%;
-
-    position: fixed;
-
-    background: #17222D;
-    z-index: 5;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
+    z-index: 2;
   }
 
-  div.menuContainer div.outCircle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  div.menuContainer button{
+    background: none;
+    border: 0;
+    outline: 0;
 
-    background: #fff;
-    border-radius: 50%;
+    color: var(--gray-50);
 
-    width: 0.5rem;
-    height: 0.5rem;
-    transition: all 0.4s ease;
-  }
+    &:before {
+      bottom: 3px;
+      content: ' ';
+      display: block;
+      height: 0.1875rem;
+      line-height: 0;
+      position: relative;
+      transform: scaleX(0);
+      transition: all 0.4s ease;
 
-  div.menuContainer div.outCircle div.inCircle{
-    background: #17222D;
-    border-radius: 50%;
+      z-index: 5;
+    }
 
-    width: 0.25rem;
-    height: 0.25rem;
-    transition: all 0.4s ease;
-  }
+    &.selected:before {
+      background-color: var(--purple-500);
+      bottom: 3px;
+      content: ' ';
+      display: block;
+      height: 0.1875rem;
+      line-height: 0;
+      position: relative;
+      transform: scaleX(1);
+      transition: all 0.4s ease;
+      z-index: 5;
+    }
 
-  div.menuContainer p{
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-left: 1rem;
-    margin-right: 2.5rem;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    transition: all 0.4s ease;
+    &:hover:before {
+      background-color: var(--purple-500);
+      bottom: 3px;
+      content: ' ';
+      display: block;
+      height: 0.1875rem;
+      line-height: 0;
+      position: relative;
+      transform: scaleX(1);
+      transition: all 0.4s ease;
+      z-index: 5;
+    }
+
+    & + button {
+      margin-left: 1.5rem;
+    }
   }
 
   div.menuContainer p:hover{

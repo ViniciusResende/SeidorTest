@@ -12,18 +12,8 @@ const Menu: React.FC = () => {
   return (
     <Wrapper>  
       <div className="menuContainer">
-        {isListInDisplay ? (
-          <div className="outCircle" style={{opacity: 1}}><div className="inCircle"></div></div>
-        ): (
-          <div className="outCircle" style={{opacity: 0}}><div className="inCircle"></div></div>
-        )}
-        <p onClick={menuListHandler}>Lista</p>
-        {isRegisterInDisplay ? (
-          <div className="outCircle" style={{opacity: 1}}><div className="inCircle"></div></div>
-        ): (
-          <div className="outCircle" style={{opacity: 0}}><div className="inCircle"></div></div>
-        )}
-        <p onClick={menuRegisterHandler}>Cadastro</p>
+        <button onClick={menuListHandler} className={isListInDisplay ? 'selected' : ''}>Lista</button>
+        <button onClick={menuRegisterHandler} className={isRegisterInDisplay ? 'selected' : ''}>Cadastro</button>
       </div>
     </Wrapper>
   )
