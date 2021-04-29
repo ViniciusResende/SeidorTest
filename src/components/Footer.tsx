@@ -8,6 +8,7 @@ const Footer: React.FC = () => {
   const {
     menuListHandler,
     menuRegisterHandler,
+    menuUpdateHandler
   } = useContext(AppContext);
 
     return (
@@ -16,6 +17,7 @@ const Footer: React.FC = () => {
         <div className="navigationContainer">
           <button onClick={menuListHandler}>Lista</button>
           <button onClick={menuRegisterHandler}>Cadastro</button>
+          <button onClick={menuUpdateHandler}>Atualizar</button>
         </div>
         <div className="sideContainer">
           <img src={CircleIcon} alt="logo"/>

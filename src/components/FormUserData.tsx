@@ -11,33 +11,35 @@ const FormUserData: React.FC = () => {
 
   const {
     isRegisterInDisplay,
+    isUpdateInDisplay,
     handleChange,
     submitUser,
-    user
+    updateUser,
+    inputValuesVeryifier
   } = useContext(AppContext);
 
+  
+
   const handleSubmit = () => {
-    if(
-      user.cpf
-      && user.name 
-      && user.salary 
-      && user.tributeDiscount  
-      && user.dependents
-      ) {
-        setHasEmptyInputs(false);
-        submitUser()
-      } else {
-        setHasEmptyInputs(true);
-      }
+    if(isRegisterInDisplay){
+      if(inputValuesVeryifier()) {
+          setHasEmptyInputs(false);
+          submitUser()
+        } else {
+          setHasEmptyInputs(true);
+        }
+    } else {
+      updateUser();
+    }
   }
   
   return (
     <Wrapper>
-      {isRegisterInDisplay &&(
+      {(isRegisterInDisplay || isUpdateInDisplay) &&(
         <>
           <header className="headerArea">
             <img src={CircleIcon} alt="logo"/>
-            <h2>Cadastro de Funcionários - Preencha os Dados</h2>
+            <h2>{!isUpdateInDisplay ? 'Cadastro' : 'Atualização'} de Funcionários - Preencha os Dados</h2>
           </header>
             <div className="FormUserData">          
               <div className={hasEmptyInputs ? 'formUserArea withEmptyInputs' : 'formUserArea'}>
@@ -47,7 +49,13 @@ const FormUserData: React.FC = () => {
                 </div>
                 <div className="inputArea">
                   <span>CPF</span>
-                  <Input name="cpf" mask="cpf" onChange={handleChange} placeholder="111.111.111-01"/>
+                  <Input 
+                    name="cpf" 
+                    mask="cpf" 
+                    onChange={handleChange} 
+                    placeholder="111.111.111-01" 
+                    style={isUpdateInDisplay ? { backgroundColor: 'var(--green-50)'} : {}}
+                  />
                 </div>       
                 <div className="inputArea">
                   <span>Salário Bruto</span>
@@ -63,7 +71,7 @@ const FormUserData: React.FC = () => {
                 </div>   
               </div>          
               <div className="submitArea">
-                <button type="submit" onClick={() => handleSubmit()}>Cadastrar</button>
+                <button type="submit" onClick={() => handleSubmit()}>{isUpdateInDisplay ? 'Atualizar' : 'Cadastrar'}</button>
                 <small>{hasEmptyInputs ? 'Preencha todos os campos' : ''}</small>
               </div>
             </div>

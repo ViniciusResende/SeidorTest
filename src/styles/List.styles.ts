@@ -5,7 +5,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #EFF4F9 6rem, #fff 10%);
+  background: linear-gradient(180deg, var(--ice) 6rem, var(--white) 10%);
+  padding-bottom: 2rem;
 
   header.headerArea {
     background: var(--purple-500);
@@ -58,7 +59,7 @@ export const Wrapper = styled.div`
 
 
   div.listContainer div.titleArea h1{
-    color: #445566;
+    color: var(--gray-800);
     font-size: 3.5rem;
     margin: 0;
   }

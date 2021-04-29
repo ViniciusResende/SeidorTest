@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     position: sticky;
     bottom: 0;
 
-    padding: 1rem 3rem;
+    padding: 1rem 8rem;
     background: var(--dark-purple);
 
     > div {

@@ -3,13 +3,17 @@ import { createContext, ReactNode, useCallback, useState } from "react";
 interface AppContextData {
   isListInDisplay: boolean;
   isRegisterInDisplay: boolean;
+  isUpdateInDisplay: boolean;
   user: User;
   users: User[];
   menuListHandler: () => void;
   menuRegisterHandler: () => void;
+  menuUpdateHandler: () => void;
   handleChange: (e: React.FormEvent<HTMLInputElement>) => void;
   submitUser: () => void;
+  updateUser: () => void;
   deleteUser: (cpf: string) => void;
+  inputValuesVeryifier: () => boolean;
 }
 
 interface CountdownProviderProps {
@@ -29,17 +33,26 @@ export const AppContext = createContext({} as AppContextData);
 
 export function AppProvider({ children }: CountdownProviderProps){
 
-  const [isListInDisplay, setIsListInDisplay] = useState(false);
-  const [isRegisterInDisplay, setIsRegisterInDisplay] = useState(true);
+  const [isListInDisplay, setIsListInDisplay] = useState(true);
+  const [isRegisterInDisplay, setIsRegisterInDisplay] = useState(false);
+  const [isUpdateInDisplay, setIsUpdateInDisplay] = useState(false);
 
   const menuListHandler = () => {
     setIsListInDisplay(true);
-    setIsRegisterInDisplay(false);
+    setIsRegisterInDisplay(false); //TODO: refactor menu logic
+    setIsUpdateInDisplay(false);
   }
 
   const menuRegisterHandler = () => {
     setIsListInDisplay(false);
     setIsRegisterInDisplay(true);
+    setIsUpdateInDisplay(false);
+  }
+
+  const menuUpdateHandler = () => {
+    setIsUpdateInDisplay(true);
+    setIsListInDisplay(false);
+    setIsRegisterInDisplay(false);
   }
 
   const [user, setUser] = useState<User>({} as User)
@@ -68,7 +81,6 @@ export function AppProvider({ children }: CountdownProviderProps){
     users.find((userStoraged) => {
       if(userStoraged.cpf === user.cpf){
         const notChangedUsers = users.filter((userStoraged) => userStoraged.cpf !== user.cpf);
-        console.log(notChangedUsers);
         const newUser = {
           ...user,
           salary: calculateSalary(user.salary, user.tributeDiscount, user.dependents),
@@ -96,6 +108,24 @@ export function AppProvider({ children }: CountdownProviderProps){
     }    
     setIsListInDisplay(true);
     setIsRegisterInDisplay(false);
+    setUser({} as User);
+  }
+
+  const updateUser = () => {
+    const oldUser = users.find((userStoraged) => userStoraged.cpf === user.cpf);
+    if(oldUser){
+      const newUser = {
+        ...oldUser,
+        ...user
+      }
+      const notChangedUsers = users.filter((userStoraged) => userStoraged.cpf !== user.cpf);
+      setUsers([
+        ...notChangedUsers,
+        newUser
+      ])
+    }
+    setIsListInDisplay(true);
+    setIsUpdateInDisplay(false);
     setUser({} as User);
   }
 
@@ -135,17 +165,35 @@ export function AppProvider({ children }: CountdownProviderProps){
     setUsers(newUsers);
   }
 
+  const inputValuesVeryifier = () => {
+    if(
+      user.cpf
+      && user.name 
+      && user.salary 
+      && user.tributeDiscount  
+      && user.dependents
+    ){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return(
     <AppContext.Provider value={{
       isListInDisplay,
       isRegisterInDisplay,
+      isUpdateInDisplay,
+      menuUpdateHandler,
       user,
       users,
       menuListHandler,
       menuRegisterHandler,
       handleChange,
       submitUser,
+      updateUser,
       deleteUser,
+      inputValuesVeryifier,
     }}>
       {children}
     </AppContext.Provider>
