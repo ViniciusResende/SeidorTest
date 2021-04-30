@@ -115,10 +115,16 @@ export function AppProvider({ children }: CountdownProviderProps){
   const updateUser = () => {
     const oldUser = users.find((userStoraged) => userStoraged.cpf === user.cpf);
     if(oldUser){
-      const newUser = {
+      let newUser = {
         ...oldUser,
         ...user
       }
+
+      if(user.salary){
+        newUser.costIRPF = calculateIRPF(calculateSalary(newUser.salary, newUser.tributeDiscount, newUser.dependents))
+        newUser.salary = calculateSalary(newUser.salary, newUser.tributeDiscount, newUser.dependents)
+      }
+      // console.log('new',newUser)
       const notChangedUsers = users.filter((userStoraged) => userStoraged.cpf !== user.cpf);
       const newUsers = [...notChangedUsers, newUser];
       setUsers(newUsers);

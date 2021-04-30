@@ -2,9 +2,9 @@ import React, { InputHTMLAttributes, useCallback } from 'react';
 
 import { cpf, currency } from './masks';
 
-import './styles.css';
+import { Container, PrefixSpan, InputElement } from './styles';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   mask: "cpf" | "currency";
   prefix?: string;
 }
@@ -23,10 +23,10 @@ const Input: React.FC<InputProps> = ({ mask, prefix,...props}) => {
   }, [mask])
 
   return(
-    <div className="input-group prefix">
-      {prefix && <span className="prefix-span">{prefix}</span>}
-      <input {...props} onKeyUp={handleKeyUp} className={prefix && "hasPrefix"}/>
-    </div>
+    <Container>
+      {prefix && <PrefixSpan>{prefix}</PrefixSpan>}
+      <InputElement {...props} onKeyUp={handleKeyUp} className={prefix && "hasPrefix"}/>
+    </Container>
   );
 }
 
