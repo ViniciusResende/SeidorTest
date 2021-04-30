@@ -1,6 +1,13 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext';
-import { Wrapper } from '../styles/List.styles';
+import { 
+  Container, 
+  HeaderArea, 
+  ListContainer, 
+  InformationSection,
+  Table,
+  Line 
+} from '../styles/List.styles';
 
 import TrashIcon from '../assets/trash.svg';
 import CircleIcon from '../assets/circle.svg';
@@ -8,7 +15,6 @@ import CircleIcon from '../assets/circle.svg';
 const List: React.FC = () => {
 
     const {
-      isListInDisplay,
       users,
       deleteUser
     } = useContext(AppContext);
@@ -23,15 +29,13 @@ const List: React.FC = () => {
       return value;
     }
     return (
-    <Wrapper>
-      {isListInDisplay && (  
-        <>
-        <header className="headerArea">
+    <Container> 
+        <HeaderArea>
           <img src={CircleIcon} alt="logo"/>
           <h2>Registrar Funcionarios - Tabelas e cálculos do IRPF</h2>
-        </header>
-        <div className="listContainer">
-          <div className="informationSection">
+        </HeaderArea>
+        <ListContainer>
+          <InformationSection>
             <h2>Tabelas e cálculos do IRPF</h2>
             <p>A tabela do IR é um dos principais instrumentos para auxiliar
               os contribuintes na hora de enviar as informações fiscais para a
@@ -45,11 +49,11 @@ const List: React.FC = () => {
               ter essa tabela é fundamental para que você não envie nenhum dado
               errado e, consequentemente, não caia na malha fina.
             </p>
-          </div>
+          </InformationSection>
 
           <h3>Lista de Usuários</h3>
-          <div className="line"></div>
-          <table>
+          <Line />
+          <Table>
             <thead>
               <tr>
                 <th>Nome</th>
@@ -78,11 +82,9 @@ const List: React.FC = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
-        </div>
-      </>
-      )}
-    </Wrapper>
+          </Table>
+        </ListContainer>
+    </Container>
   )
 }
 

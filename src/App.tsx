@@ -1,12 +1,13 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { GlobalStyle } from './App.styles';
 import { AppProvider } from './contexts/AppContext'
 
 import Menu from './components/Menu'
-import FormUserData from './components/FormUserData';
-import List from './components/List';
 import Footer from './components/Footer';
+
+import Routes from './Routes';
 
 const App: React.FC = () => {
   
@@ -15,13 +16,12 @@ const App: React.FC = () => {
   return (
     <>
     <AppProvider>
-      <GlobalStyle />
-      <div className="App">
+      <BrowserRouter>
         <Menu />
-        <FormUserData />
-        <List />
+        <Routes />
         <Footer />
-      </div>
+        <GlobalStyle />
+      </BrowserRouter>
     </AppProvider>
     </>
   );

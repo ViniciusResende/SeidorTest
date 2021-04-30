@@ -1,24 +1,44 @@
 import React, {useContext} from 'react'
+import { Link } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
-import { Wrapper } from '../styles/Menu.styles';
+import { Container, MenuButton, MenuContent } from '../styles/Menu.styles';
 
 const Menu: React.FC = () => {
   const {
-    isListInDisplay,
-    isRegisterInDisplay,
-    isUpdateInDisplay,
+    actualPath,
     menuListHandler,
     menuRegisterHandler,
     menuUpdateHandler,
   } = useContext(AppContext);
   return (
-    <Wrapper>  
-      <div className="menuContainer">
-        <button onClick={menuListHandler} className={isListInDisplay ? 'selected' : ''}>Lista</button>
-        <button onClick={menuRegisterHandler} className={isRegisterInDisplay ? 'selected' : ''}>Cadastro</button>
-        <button onClick={menuUpdateHandler} className={isUpdateInDisplay ? 'selected' : ''}>Atualizar</button>
-      </div>
-    </Wrapper>
+    <Container>  
+      <MenuContent>
+        <MenuButton 
+          as={Link} 
+          to='/' 
+          onClick={menuListHandler} 
+          className={actualPath === '' ? 'selected' : ''}
+        >
+            Lista
+        </MenuButton>
+        <MenuButton
+          as={Link} 
+          to='/register'  
+          onClick={menuRegisterHandler} 
+          className={actualPath === 'register' ? 'selected' : ''}
+        >
+          Cadastro
+        </MenuButton>
+        <MenuButton 
+          as={Link} 
+          to='/update' 
+          onClick={menuUpdateHandler} 
+          className={actualPath === 'update' ? 'selected' : ''}
+        >
+          Atualizar
+        </MenuButton>
+      </MenuContent>
+    </Container>
   )
 }
 

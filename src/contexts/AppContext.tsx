@@ -1,9 +1,7 @@
-import { createContext, ReactNode, useCallback, useState } from "react";
+import React, { createContext, ReactNode, useCallback, useState } from "react";
 
 interface AppContextData {
-  isListInDisplay: boolean;
-  isRegisterInDisplay: boolean;
-  isUpdateInDisplay: boolean;
+  actualPath: string;
   user: User;
   users: User[];
   menuListHandler: () => void;
@@ -33,30 +31,32 @@ export const AppContext = createContext({} as AppContextData);
 
 export function AppProvider({ children }: CountdownProviderProps){
 
-  const [isListInDisplay, setIsListInDisplay] = useState(true);
-  const [isRegisterInDisplay, setIsRegisterInDisplay] = useState(false);
-  const [isUpdateInDisplay, setIsUpdateInDisplay] = useState(false);
+  const [actualPath, setActualPath] = useState<string>(localStorage.getItem("@SeidorTest:actualPath") || '');
 
   const menuListHandler = () => {
-    setIsListInDisplay(true);
-    setIsRegisterInDisplay(false); //TODO: refactor menu logic
-    setIsUpdateInDisplay(false);
+    setActualPath('');
+    localStorage.setItem("@SeidorTest:actualPath", '');
   }
 
   const menuRegisterHandler = () => {
-    setIsListInDisplay(false);
-    setIsRegisterInDisplay(true);
-    setIsUpdateInDisplay(false);
+    setActualPath('register');
+    localStorage.setItem("@SeidorTest:actualPath", 'register');
   }
 
   const menuUpdateHandler = () => {
-    setIsUpdateInDisplay(true);
-    setIsListInDisplay(false);
-    setIsRegisterInDisplay(false);
+    setActualPath('update');
+    localStorage.setItem("@SeidorTest:actualPath", 'update');
   }
 
   const [user, setUser] = useState<User>({} as User)
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<User[]>(() => {
+    const storagedUsers = localStorage.getItem(`@SeidorTest:users`);
+    if(storagedUsers){
+      return JSON.parse(storagedUsers);
+    }
+
+    return [];
+  })
 
   
   const handleChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
@@ -101,13 +101,14 @@ export function AppProvider({ children }: CountdownProviderProps){
         costIRPF: calculateIRPF(calculateSalary(user.salary, user.tributeDiscount, user.dependents)),
       }
   
-      setUsers([
-        ...users,
-        newUser
-      ])
+      const newUsers = [...users, newUser];
+      setUsers(newUsers)
+      localStorage.setItem(
+        `@SeidorTest:users`, 
+        JSON.stringify(newUsers)
+      );
     }    
-    setIsListInDisplay(true);
-    setIsRegisterInDisplay(false);
+    setActualPath('');
     setUser({} as User);
   }
 
@@ -119,13 +120,14 @@ export function AppProvider({ children }: CountdownProviderProps){
         ...user
       }
       const notChangedUsers = users.filter((userStoraged) => userStoraged.cpf !== user.cpf);
-      setUsers([
-        ...notChangedUsers,
-        newUser
-      ])
+      const newUsers = [...notChangedUsers, newUser];
+      setUsers(newUsers);
+      localStorage.setItem(
+        `@SeidorTest:users`, 
+        JSON.stringify(newUsers)
+      );
     }
-    setIsListInDisplay(true);
-    setIsUpdateInDisplay(false);
+    setActualPath('');
     setUser({} as User);
   }
 
@@ -163,6 +165,11 @@ export function AppProvider({ children }: CountdownProviderProps){
   const deleteUser = (cpf: string) => {
     const newUsers = users.filter((userStoraged) => userStoraged.cpf !== cpf);
     setUsers(newUsers);
+
+    localStorage.setItem(
+      `@SeidorTest:users`, 
+      JSON.stringify(newUsers)
+    );
   }
 
   const inputValuesVeryifier = () => {
@@ -181,9 +188,7 @@ export function AppProvider({ children }: CountdownProviderProps){
 
   return(
     <AppContext.Provider value={{
-      isListInDisplay,
-      isRegisterInDisplay,
-      isUpdateInDisplay,
+      actualPath,
       menuUpdateHandler,
       user,
       users,

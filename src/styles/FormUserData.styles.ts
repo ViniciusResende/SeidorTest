@@ -1,117 +1,113 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, var(--ice) 8rem, var(--white) 10%);
-  
-  header.headerArea {
-    background: var(--purple-500);
-    width: 100%;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
+`;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+export const HeaderArea = styled.header`
+  background: var(--purple-500);
+  width: 100%;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
 
-    > img {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    > h2 {
-      margin-top: 1rem;
-      color: var(--gray-100);
-    }
+  > img {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
-  div.FormUserData{    
-    font-family: 'Nunito', sans-serif;
+  > h2 {
+    margin-top: 1rem;
+    color: var(--gray-100);
   }
+`;
 
-  div.FormUserData div.formUserArea {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2.25rem;
+export const Form = styled.form`
+  font-family: 'Nunito', sans-serif;
+`;
+
+export const FormUserArea = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2.25rem;
+
+  &.withEmptyInputs div input{
+    background: var(--red-50)
   }
+`;
 
+export const InputArea = styled.div`
+  display: flex;
+  flex-direction: column;
 
-  div.FormUserData div.formUserArea div.inputArea:nth-child(1){
-    grid-column: span 2;
-  }
-
-  @media(max-width: 767px){
-    div.FormUserData div.formUserArea div.inputArea {
-      grid-column: span 2;
-    }
-  }
-
-  div.FormUserData div.formUserArea div.inputArea{
-    display: flex;
-    flex-direction: column;
-  }
-
-  div.FormUserData div.formUserArea div.inputArea span{
+  > span {
     color: var(--gray-800);
     font-weight: 700;
   }
 
-  div.FormUserData div.formUserArea div.inputArea input{
+  input {
     background: var(--ice);
     border: none;
     border-radius: 5px;
     padding: 1rem;
     box-shadow: 0px 2px 2px rgba(187, 204, 221, 0.4);
+
+    &::placeholder{
+      font-weight: 900;
+      color: rgba(68,85,102,0.25);
+    }
   }
 
-  div.FormUserData div.formUserArea.withEmptyInputs div.inputArea input{
-    background: var(--red-50)
+  &:nth-child(1){
+    grid-column: span 2;
   }
 
-  div.FormUserData div.formUserArea div.inputArea input::placeholder{
-    font-weight: 900;
-    color: rgba(68,85,102,0.25)
+  @media(max-width: 767px){
+    grid-column: span 2;
   }
+`;
 
-  div.FormUserData div.submitArea {
+export const SubmitArea = styled.div`
     display: flex;
     flex-direction: column;
 
     margin-top: 4rem;
-  }
 
-  div.FormUserData div.submitArea button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    max-width: 15rem;
-    width: 100%;
+    > small {
+      color: var(--red-500);
 
-    color: var(--white);
-    font-weight: 600;
-    text-transform: uppercase;
+      margin: 0.5rem 0 2rem 0;
+    }
+`;
 
-    background: var(--purple-300);
-    border: 1px solid var(--gray-500);
-    border-radius: 5px;
+export const SubmitButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  max-width: 15rem;
+  width: 100%;
 
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
 
-  div.FormUserData div.submitArea button:hover{
+  background: var(--purple-300);
+  border: 1px solid var(--gray-500);
+  border-radius: 5px;
+
+  cursor: pointer;
+  transition: filter 0.4s ease;
+
+  &:hover {
     filter: brightness(0.9);
   }
-
-  div.FormUserData div.submitArea small {
-    color: var(--red-500);
-
-    margin: 0.5rem 0 2rem 0;
-  }
-  
-`
+`;

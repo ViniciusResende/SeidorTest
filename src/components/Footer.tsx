@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import { Wrapper } from '../styles/Footer.styles';
+import { Container, SideContainer, FooterButton } from '../styles/Footer.styles';
 
 import CircleIcon from '../assets/circle.svg';
 import { AppContext } from '../contexts/AppContext';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const {
@@ -11,23 +12,21 @@ const Footer: React.FC = () => {
     menuUpdateHandler
   } = useContext(AppContext);
 
-    return (
-    <Wrapper>  
-      <div className="footerContainer">
-        <div className="navigationContainer">
-          <button onClick={menuListHandler}>Lista</button>
-          <button onClick={menuRegisterHandler}>Cadastro</button>
-          <button onClick={menuUpdateHandler}>Atualizar</button>
+    return (  
+      <Container>
+        <div>
+          <FooterButton as={Link} to="/" onClick={menuListHandler}>Lista</FooterButton>
+          <FooterButton as={Link} to="/register" onClick={menuRegisterHandler}>Cadastro</FooterButton>
+          <FooterButton as={Link} to="/update" onClick={menuUpdateHandler}>Atualizar</FooterButton>
         </div>
-        <div className="sideContainer">
+        <SideContainer>
           <img src={CircleIcon} alt="logo"/>
           <p>Copyright © 2021.</p>
           <p>Todos os direitos reservados à</p>
           <p>Vinícius Alves</p>
-        </div>
-      </div>
-    </Wrapper>
-  )
+        </SideContainer>
+      </Container>
+    )
 }
 
 export default Footer
