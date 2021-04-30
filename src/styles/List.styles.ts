@@ -102,7 +102,7 @@ export const Table = styled.table`
 
     @media(max-width: 624px){
       &:nth-child(5){
-        max-width: 50px;
+        max-width: 10px;
         overflow: hidden;
         text-overflow: ellipsis;
       }
