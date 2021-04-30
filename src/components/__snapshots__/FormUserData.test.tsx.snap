@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render the form 1`] = `
+<div
+  className="sc-bdfBwQ hltkiB"
+>
+  <header
+    className="sc-gsTCUz dmOGCc"
+  >
+    <img
+      alt="logo"
+      src="circle.svg"
+    />
+    <h2>
+      Cadastro
+       de Funcionários - Preencha os Dados
+    </h2>
+  </header>
+  <form
+    className="sc-dlfnbm jhjdkI"
+    onSubmit={[Function]}
+  >
+    <div
+      className="sc-hKgILt ecSqun"
+    >
+      <div
+        className="sc-eCssSg ecVBuq"
+      >
+        <span>
+          Nome
+        </span>
+        <input
+          name="name"
+          type="text"
+        />
+      </div>
+      <div
+        className="sc-eCssSg ecVBuq"
+      >
+        <span>
+          CPF
+        </span>
+        <div
+          className="sc-iBPRYJ ehQuPe"
+        >
+          <input
+            className="sc-pFZIQ buicrI"
+            name="cpf"
+            onKeyUp={[Function]}
+            placeholder="111.111.111-01"
+            style={Object {}}
+          />
+        </div>
+      </div>
+      <div
+        className="sc-eCssSg ecVBuq"
+      >
+        <span>
+          Salário Bruto
+        </span>
+        <div
+          className="sc-iBPRYJ ehQuPe"
+        >
+          <span
+            className="sc-fubCfw jUBhBQ"
+          >
+            R$
+          </span>
+          <input
+            className="sc-pFZIQ buicrI hasPrefix"
+            name="salary"
+            onKeyUp={[Function]}
+            placeholder="9.999,99"
+          />
+        </div>
+      </div>
+      <div
+        className="sc-eCssSg ecVBuq"
+      >
+        <span>
+          Desconto da previdência
+        </span>
+        <div
+          className="sc-iBPRYJ ehQuPe"
+        >
+          <span
+            className="sc-fubCfw jUBhBQ"
+          >
+            R$
+          </span>
+          <input
+            className="sc-pFZIQ buicrI hasPrefix"
+            name="tributeDiscount"
+            onKeyUp={[Function]}
+            placeholder="9.999,99"
+          />
+        </div>
+      </div>
+      <div
+        className="sc-eCssSg ecVBuq"
+      >
+        <span>
+          Número de dependentes
+        </span>
+        <input
+          min="0"
+          name="dependents"
+          placeholder="0"
+          type="number"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-jSgupP DrBls"
+    >
+      <button
+        className="sc-gKsewC cSHBba"
+        type="submit"
+      >
+        Cadastrar
+      </button>
+      <small>
+        
+      </small>
+    </div>
+  </form>
+</div>
+`;

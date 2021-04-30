@@ -14,12 +14,13 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   html{
-    height: 100%
+    height: 100%;
+    font-size: 20px;
   }
 
   * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
   }
 
   *,
@@ -49,18 +50,6 @@ export const GlobalStyle = createGlobalStyle`
   --purple-800: #6f48c9;
 
   --dark-purple: #1c1233;
-}
-
-@media (max-width: 1080px) {
-  html {
-    font-size: 93.75%;
-  }
-}
-
-@media (max-width: 720px) {
-  html {
-    font-size: 87.5%;
-  }
 }
 
 body {

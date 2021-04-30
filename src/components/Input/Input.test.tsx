@@ -1,11 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import renderer from 'react-test-renderer';
 import Input from './index';
 
 test('Should render the custom input', () => {
-  const { getByPlaceholderText } = render(<Input mask="cpf" placeholder="text"/>);
-  const inputElement = getByPlaceholderText("text");
-  expect(inputElement).toBeInstanceOf(HTMLInputElement);
+  const tree = renderer
+    .create(<Input mask="currency" />)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
 test('Should render a prefix div with span in case of having it', () => {

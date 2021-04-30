@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render the Footer with navigation anchors 1`] = `
+<nav
+  className="sc-bdfBwQ xUcrl"
+>
+  <div
+    className="sc-gsTCUz ePrpVt"
+  >
+    <a
+      className="sc-dlfnbm gNdSov"
+      href="/"
+      onClick={[Function]}
+    >
+      Lista
+    </a>
+    <a
+      className="sc-dlfnbm gNdSov"
+      href="/register"
+      onClick={[Function]}
+    >
+      Cadastro
+    </a>
+    <a
+      className="sc-dlfnbm gNdSov"
+      href="/update"
+      onClick={[Function]}
+    >
+      Atualizar
+    </a>
+  </div>
+</nav>
+`;

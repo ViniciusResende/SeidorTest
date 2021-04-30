@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
+
 import { AppContext } from '../contexts/AppContext';
 import { 
   Container, 
@@ -13,11 +14,10 @@ import TrashIcon from '../assets/trash.svg';
 import CircleIcon from '../assets/circle.svg';
 
 const List: React.FC = () => {
-
     const {
       users,
       deleteUser
-    } = useContext(AppContext);
+    } = React.useContext(AppContext);
 
     const formatCurrencyToString = (currency: number): string => {
       // this function transform a float number into a string with formated value of BRL

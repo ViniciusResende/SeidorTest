@@ -17,6 +17,10 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
   }
+
+  @media (max-width: 600px){
+    padding: 1.5rem 2rem;
+  }
 `;
 
 export const SideContainer = styled.div`

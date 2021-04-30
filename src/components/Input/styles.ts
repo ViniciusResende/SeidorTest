@@ -8,8 +8,8 @@ export const Container = styled.div`
 export const PrefixSpan = styled.span`
   display: flex;
   align-items: center;
-
   padding: 6px 12px;
+
   font-size: 14px;
   color: var(--gray-800);
   background-color: var(--ice);

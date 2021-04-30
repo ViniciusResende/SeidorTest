@@ -10,6 +10,7 @@ const Menu: React.FC = () => {
     menuRegisterHandler,
     menuUpdateHandler,
   } = useContext(AppContext);
+  
   return (
     <Container>  
       <MenuContent>

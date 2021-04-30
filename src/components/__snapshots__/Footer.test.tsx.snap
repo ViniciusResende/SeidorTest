@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render the Footer with navigation anchors 1`] = `
+<div
+  className="sc-bdfBwQ dzHHMX"
+>
+  <div>
+    <a
+      className="sc-dlfnbm kJyqox"
+      href="/"
+      onClick={[Function]}
+    >
+      Lista
+    </a>
+    <a
+      className="sc-dlfnbm kJyqox"
+      href="/register"
+      onClick={[Function]}
+    >
+      Cadastro
+    </a>
+    <a
+      className="sc-dlfnbm kJyqox"
+      href="/update"
+      onClick={[Function]}
+    >
+      Atualizar
+    </a>
+  </div>
+  <div
+    className="sc-gsTCUz jeMrqT"
+  >
+    <img
+      alt="logo"
+      src="circle.svg"
+    />
+    <p>
+      Copyright © 2021.
+    </p>
+    <p>
+      Todos os direitos reservados à
+    </p>
+    <p>
+      Vinícius Alves
+    </p>
+  </div>
+</div>
+`;

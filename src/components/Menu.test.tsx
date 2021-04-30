@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'; //fazer a parada q o Bruno me ensinou
+import renderer from 'react-test-renderer';
+import { BrowserRouter } from 'react-router-dom';
 import Menu from './Menu';
 
 const NewMenu = () => {
@@ -11,8 +11,9 @@ const NewMenu = () => {
   )
 }
 
-test('Should render the Menu with navigation anchors', () => {
-  const { getByText } = render(<NewMenu />);
-  const menuButton = getByText("Cadastro");
-  expect(menuButton).toBeInstanceOf(HTMLAnchorElement);
+test('Should render the Footer with navigation anchors', () => {
+  const tree = renderer
+    .create(<NewMenu />)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });

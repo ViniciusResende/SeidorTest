@@ -40,6 +40,15 @@ export const ListContainer = styled.div`
     color: var(--purple-300);
     margin-bottom: 0.75rem;
   }
+
+  @media (max-width: 1160px){
+    width: 100%;
+    padding: 1rem 1rem;
+  }
+
+  @media (max-width: 365px){
+    padding: 1rem 0.1rem;
+  }
 `;
 
 export const InformationSection = styled.div`
@@ -67,11 +76,16 @@ export const Table = styled.table`
 
   td,
   th {
+    font-size: 1rem;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--gray-100);
 
     @media(max-width: 767px){
       font-size: 0.75rem;
+    }
+
+    @media(max-width: 580px){
+      padding: 0.75rem 0.25rem;
     }
   }
 
@@ -85,6 +99,19 @@ export const Table = styled.table`
     &:nth-child(7){
       text-align: center;
     }
+
+    @media(max-width: 624px){
+      &:nth-child(5){
+        max-width: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    @media(max-width: 580px){
+      &:nth-child(7){
+        display: none;
+      }
+    }
   }
 
   td {
@@ -94,13 +121,11 @@ export const Table = styled.table`
     font-weight: 600;
     text-decoration: none;
     line-height: 1.4rem;
-    font-size: 0.75rem;
     
     &:nth-child(5),
     &:nth-child(7){
       text-align: center;
     }
-
 
 
     button {
@@ -120,6 +145,27 @@ export const Table = styled.table`
 
       &:hover {
         filter: brightness(0.95);
+      }
+
+      @media(max-width: 380px){
+        background: transparent;
+        border: 0;
+        height: 1rem;
+        width: 1rem;
+
+        img {
+          width: 0.75rem;
+          height: 0.75rem;
+        }
+      }
+    }
+
+    
+    @media(max-width: 420px){
+      &:nth-child(2) {
+        max-width: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;  
       }
     }
   }

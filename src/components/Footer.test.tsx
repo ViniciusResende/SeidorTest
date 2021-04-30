@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'; //fazer a parada q o Bruno me ensinou
+import renderer from 'react-test-renderer';
+import { BrowserRouter } from 'react-router-dom';
 import Footer from './Footer';
 
 const NewFooter = () => {
@@ -12,19 +12,8 @@ const NewFooter = () => {
 }
 
 test('Should render the Footer with navigation anchors', () => {
-  const { getByText } = render(<NewFooter />);
-  const footerButton = getByText("Lista");
-  expect(footerButton).toBeInstanceOf(HTMLAnchorElement);
+  const tree = renderer
+    .create(<NewFooter />)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
-
-test('Should render the Footer text', () => {
-  const { getByText } = render(<NewFooter />);
-  const footerText = getByText("Todos os direitos reservados à");
-  expect(footerText).toBeInstanceOf(HTMLParagraphElement);
-})
-
-test('Should render the Footer logo image', () => {
-  const { getByAltText } = render(<NewFooter />);
-  const footerImage = getByAltText("logo");
-  expect(footerImage).toBeInstanceOf(HTMLImageElement);
-})

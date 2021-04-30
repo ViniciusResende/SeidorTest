@@ -1,28 +1,66 @@
-import React from 'react';
-// import { render } from '@testing-library/react';
-// import { BrowserRouter } from 'react-router-dom'; //fazer a parada q o Bruno me ensinou
-// import List from './List';
+import React, { Context } from 'react';
+import renderer from 'react-test-renderer';
+import List from './List';
 
-// const NewList= () => {
-//   return (
-//     <BrowserRouter>
-//       <List />
-//     </BrowserRouter>
-//   )
-// }
+describe('List component', () => {
+  let realUseContext: <T>(context: Context<T>) => T;
+  let mockUseContext: jest.Mock<any, any>;
+  beforeEach(() => {
+    realUseContext = React.useContext;
+    mockUseContext = React.useContext = jest.fn();
+  });
 
-// test('Should render the List with Header content', () => {
-//   const { getByText, getByAltText } = render(<NewList />);
-//   const headerTitle = getByText("Registrar Funcionarios - Tabelas e cálculos do IRPF");
-//   expect(headerTitle).toBeInstanceOf(HTMLTitleElement);
-//   const headerImage = getByAltText("logo");
-//   expect(headerImage).toBeInstanceOf(HTMLImageElement);
-// });
+  afterEach(() => {
+    React.useContext = realUseContext;
+  });
 
-// test('Should render the List with InformationSection content', () => {
-//   const { getByText } = render(<NewList />);
-//   const informationTitle = getByText("Tabelas e cálculos do IRPF");
-//   expect(informationTitle).toBeInstanceOf(HTMLTitleElement);
-//   const informationContent = getByText(/A tabela do IR é um dos/i);
-//   expect(informationContent).toBeInstanceOf(HTMLParagraphElement);
-// });
+  it('renders correctly', () => {
+    mockUseContext.mockImplementation(() => {
+      return {
+        users: [
+        {
+          name: 'Vinícius Alves',
+          cpf: '123.456.067-43',
+          salary: 2334433,
+          tributeDiscount: 323,
+          dependents: 2,
+          costIRPF: 32323,
+        },
+        {
+          name: 'Bruno Alves',
+          cpf: '123.456.067-43',
+          salary: 2334433,
+          tributeDiscount: 323,
+          dependents: 2,
+          costIRPF: 32323,
+        }
+      ],
+        deleteUser: jest.fn()
+      }
+    });
+    // mockUseContext.mockReturnValue({
+    //   users: [
+    //     {
+    //       name: 'Vinícius Alves',
+    //       cpf: '123.456.067-43',
+    //       salary: 2334433,
+    //       tributeDiscount: 323,
+    //       dependents: 2,
+    //       costIRPF: 32323,
+    //     },
+    //     {
+    //       name: 'Bruno Alves',
+    //       cpf: '123.456.067-43',
+    //       salary: 2334433,
+    //       tributeDiscount: 323,
+    //       dependents: 2,
+    //       costIRPF: 32323,
+    //     }
+    //   ],
+    //     deleteUser: jest.fn()
+    // })
+    
+    const tree = renderer.create(<List />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

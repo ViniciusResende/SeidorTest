@@ -14,6 +14,10 @@ export const Container = styled.nav`
   padding: 1.5rem 6rem;
 
   z-index: 1030;
+
+  @media (max-width: 380px){
+    padding: 1.5rem 0;
+  }
 `
 
 export const MenuContent = styled.div`
